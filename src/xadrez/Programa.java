@@ -5,6 +5,7 @@
  */
 package xadrez;
 
+import boardgame.Board;
 import boardgame.Position;
 
 /**
@@ -19,9 +20,7 @@ public class Programa {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Position p = new Position(3, 4);
-        
-        System.out.println(p.toString());
+        Board board = new Board(8, 8);
     }
     
 }
