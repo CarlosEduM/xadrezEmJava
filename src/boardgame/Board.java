@@ -15,9 +15,13 @@ public class Board {
     private int colums;
     private Piece[][] pieces;
 
-    public Board(int rows, int colums) {
+    public Board(int rows, int columns) {
+        if(rows < 1 || columns < 1){
+            throw new BoardException("Erro na criação do tabuleiro: numero de linhas e colunas não pode ser menor que 1");
+        }
+        
         this.rows = rows;
-        this.colums = colums;
+        this.colums = columns;
         this.pieces = new Piece[rows][colums];
     }
 
@@ -25,24 +29,45 @@ public class Board {
         return rows;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
-    }
-
     public int getColums() {
         return colums;
     }
-
-    public void setColums(int colums) {
-        this.colums = colums;
-    }
     
     public Piece piece(int row, int column){
+        if(!positionExists(row, column)){
+            throw new BoardException("Posição inexistente");
+        }
         return this.pieces[row][column];
     }
     
     public Piece piece(Position position){
+        if(!positionExists(position)){
+            throw new BoardException("Posição inexistente");
+        }
         return this.pieces[position.getRow()][position.getColumn()];
     }
     
+    public void placePiece(Piece piece, Position position){
+        if(thereIsAPiece(position)){
+            throw new BoardException("Já há uma peça na posição " + position);
+        }
+        
+        this.pieces[position.getRow()][position.getColumn()] = piece;
+        piece.position = position;
+    }
+    
+    private boolean positionExists(int row, int column){
+        return row >= 0 && row < this.rows && column >= 0 && column < this.colums;
+    }
+    
+    public boolean positionExists(Position position){
+        return this.positionExists(position.getRow(), position.getColumn());
+    }
+    
+    public boolean thereIsAPiece(Position position){
+        if(!positionExists(position)){
+            throw new BoardException("Posição inexistente");
+        }
+        return this.piece(position) != null;
+    }
 }
