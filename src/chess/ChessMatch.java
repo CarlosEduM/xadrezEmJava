@@ -6,7 +6,6 @@
 package chess;
 
 import boardgame.Board;
-import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
@@ -24,20 +23,24 @@ public class ChessMatch {
     }
     
     public ChessPiece[][] getPieces() {
-        ChessPiece[][] mat = new ChessPiece[board.getRows()][board.getColums()];
+        ChessPiece[][] mat = new ChessPiece[this.board.getRows()][this.board.getColums()];
         
-        for(int i = 0; i < board.getRows(); i++){
-            for(int j = 0; j < board.getColums(); j++){
-                mat[i][j] = (ChessPiece) board.piece(i, j);
+        for(int i = 0; i < this.board.getRows(); i++){
+            for(int j = 0; j < this.board.getColums(); j++){
+                mat[i][j] = (ChessPiece) this.board.piece(i, j);
             }
         }
         
         return mat;
     }
     
+    private void placeNewPiece(char column, int row, ChessPiece piece){
+        this.board.placePiece(piece, new ChessPosition(column, row).toPosition());
+    }
+    
     private void initialSetup(){
-        board.placePiece(new Rook(Color.WHITE, board), new Position(-2, 1));
-        board.placePiece(new King(Color.BLACK, board), new Position(0, 4));
-        board.placePiece(new King(Color.WHITE, board), new Position(7, 4));
+        placeNewPiece('b', 6, new Rook(Color.WHITE, board));
+        placeNewPiece('e', 8, new King(Color.BLACK, board));
+        placeNewPiece('e', 1, new King(Color.WHITE, board));
     }
 }
