@@ -42,7 +42,7 @@ public class Board {
     
     public Piece piece(Position position){
         if(!positionExists(position)){
-            throw new BoardException("Posição inexistente");
+            throw new BoardException("Posicao inexistente");
         }
         return this.pieces[position.getRow()][position.getColumn()];
     }
@@ -56,6 +56,23 @@ public class Board {
         piece.position = position;
     }
     
+    public Piece removePiece(Position position){
+        if(!this.positionExists(position)){
+            throw new BoardException("Posicao fora do tabuleiro");
+        }
+        
+        if(this.piece(position) == null){
+            return null;
+        }
+        
+        Piece aux = this.piece(position);
+        aux.position = null;
+        
+        pieces[position.getRow()][position.getColumn()] = null;
+        
+        return aux;
+    }
+    
     private boolean positionExists(int row, int column){
         return row >= 0 && row < this.rows && column >= 0 && column < this.colums;
     }
@@ -66,7 +83,7 @@ public class Board {
     
     public boolean thereIsAPiece(Position position){
         if(!positionExists(position)){
-            throw new BoardException("Posição inexistente");
+            throw new BoardException("Posicao inexistente");
         }
         return this.piece(position) != null;
     }

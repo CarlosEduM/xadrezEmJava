@@ -5,11 +5,13 @@
  */
 package chess;
 
+import boardgame.BoardException;
+
 /**
  *
  * @author Cadu
  */
-public class ChessExeception extends RuntimeException{
+public class ChessExeception extends BoardException{
 
     public ChessExeception(String message) {
         super(message);
