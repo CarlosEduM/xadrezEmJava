@@ -18,7 +18,7 @@ public class ChessPosition {
 
     public ChessPosition(char column, int row) {
         if(column < 'a' || column > 'h' || row < 1 || row > 8){
-            throw new ChessExeception("Posicao fora do tabuleiro escolha entre a1 e h8");
+            throw new ChessException("Posicao fora do tabuleiro escolha entre a1 e h8");
         }
         this.column = column;
         this.row = row;

@@ -11,9 +11,9 @@ import boardgame.BoardException;
  *
  * @author Cadu
  */
-public class ChessExeception extends BoardException{
+public class ChessException extends BoardException{
 
-    public ChessExeception(String message) {
+    public ChessException(String message) {
         super(message);
     }
     
