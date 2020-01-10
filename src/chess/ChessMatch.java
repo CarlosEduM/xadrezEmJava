@@ -55,8 +55,12 @@ public class ChessMatch {
     private void validateSourcePosition(Position source){
         if(!this.board.thereIsAPiece(source)){
             throw new ChessException("Nao existe nenhuma peca nesta posicao");
-            
         }
+        
+        if(!this.board.piece(source).isThereAnyPossibleMove()){
+            throw new ChessException("Nao existe movimentos possiveis com essa peca");
+        }
+        
     }
     
     private void placeNewPiece(char column, int row, ChessPiece piece){
