@@ -39,8 +39,9 @@ public class ChessMatch {
     public ChessPiece perforChessMove(ChessPosition sourcePosition, ChessPosition targetPosition){
         Position source = sourcePosition.toPosition();
         Position target = targetPosition.toPosition();
-        validateSourcePosition(source);
-        Piece capturedPiece = makeMove(source, target);
+        this.validateSourcePosition(source);
+        this.validateTargetPosition(source, target);
+        Piece capturedPiece = this.makeMove(source, target);
         
         return (ChessPiece) capturedPiece;
     }
@@ -63,6 +64,12 @@ public class ChessMatch {
         
     }
     
+    private void validateTargetPosition(Position source, Position target) {
+        if(!this.board.piece(source).possibleMove(target)){
+            throw new ChessException("Esta peca nao pode fazer esse movimento");
+        }
+    }
+    
     private void placeNewPiece(char column, int row, ChessPiece piece){
         this.board.placePiece(piece, new ChessPosition(column, row).toPosition());
     }
@@ -82,4 +89,5 @@ public class ChessMatch {
         placeNewPiece('e', 8, new Rook(board, Color.BLACK));
         placeNewPiece('d', 8, new King(board, Color.BLACK));
     }
+
 }
