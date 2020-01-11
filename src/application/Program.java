@@ -18,7 +18,7 @@ import java.util.Scanner;
  *
  * @author Cadu
  */
-public class Programa {
+public class Program {
 
     /**
      * @param args the command line arguments
